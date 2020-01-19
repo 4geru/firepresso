@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import useOnDocument from './common/useOnDocument';
-import { Typography, Grid, IconButton } from '@material-ui/core';
+import { Typography, Grid, IconButton, Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import CommonFrame from './CommonFrame';
-import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
 });
@@ -22,14 +21,18 @@ class Like extends React.Component {
     // const [ readOnly, setReadOnly ] = useState(true);
 
     this.state = {
-      liked: false
+      liked: false,
+      likeCount: 0
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
+    // refresh value
+    const likeCount = this.state.liked == true ? 0 : 1;
     this.setState({
-      liked: !this.state.liked
+      liked: !this.state.liked,
+      likeCount: likeCount
     });
   }
 
@@ -38,12 +41,13 @@ class Like extends React.Component {
     const text = this.state.liked ? 'liked' : 'haven\'t liked';
     const label = this.state.liked ? 'Unlike' : 'Like'
     const color = this.state.liked ? 'secondary' : 'primary'
+    const likeCount = this.state.likeCount;
     return (
       <div className="customContainer">
-        {/* <Button  onClick={this.handleClick} color={color} variant="contained">
+        <Button  onClick={this.handleClick} color={color} variant="contained">
           {label}
-        </Button> */}
-        <Icon onClick={this.handleClick}>add_circle</Icon>
+        </Button>
+        {likeCount}
       </div>
     );
   }
