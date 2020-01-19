@@ -1,12 +1,13 @@
-// Replace this section with the config file of your own Firebase project. 
+// Replace this section with the config file of your own Firebase project.
 const firebaseConfig = {
-  apiKey: "AIzaSyDIRRdPkeCQVniv22YDXH6oA1oW7AOPwI4",
-  authDomain: "firepresso.firebaseapp.com",
-  databaseURL: "https://firepresso.firebaseio.com",
-  projectId: "firepresso",
-  storageBucket: "firepresso.appspot.com",
-  messagingSenderId: "351087874664",
-  appId: "1:351087874664:web:ad9ecba660715261e861dd"
+  apiKey: "AIzaSyBMo7v-me1T68kfv53EpSyr1sCPjkWhx3g",
+  authDomain: "test-2020-01.firebaseapp.com",
+  databaseURL: "https://test-2020-01.firebaseio.com",
+  projectId: "test-2020-01",
+  storageBucket: "test-2020-01.appspot.com",
+  messagingSenderId: "802499643836",
+  appId: "1:802499643836:web:c1a66090711057285e43b9",
+  measurementId: "G-VE25KN520B"
 };
 
 export default firebaseConfig;
