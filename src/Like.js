@@ -1,39 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import useOnDocument from '../common/useOnDocument';
+import useOnDocument from './common/useOnDocument';
 import { Typography, Grid, IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import BlogSection from './BlogSection';
-import Like from '../Like';
-import CommonFrame from '../CommonFrame';
+import CommonFrame from './CommonFrame';
 
 const styles = theme => ({
-  readerFrame: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  editorFrame: {
-
-  },
-  title: {
-    fontWeight: "600",
-    marginBottom: theme.spacing(2),
-    fontSize: "1.4rem",
-    '@media (min-width:480px)': {
-      fontSize: '1.8rem',
-    },
-  },
-  userFrame: {
-    marginBottom: theme.spacing(2),
-  },
-  userName: {
-    //color: "#606060",
-    marginLeft: theme.spacing(1),
-  },
 });
 
-function Article(props) {
+function Like(props) {
   const { db, user, match, classes } = props;
   const { userId, articleId } = match.params;
   const pathArticle = `/users/${userId}/articles/${articleId}`;
@@ -42,6 +18,8 @@ function Article(props) {
   const [ sections, setSections ] = useState(null);
   const [ readOnly, setReadOnly ] = useState(true);
 
+  // == after check ===
+  // db access!!
   useEffect(() => {
     // Note: We can refArticle. Otherwise, useEffect will called for each render.
     const detatcher = db.collection(`${pathArticle}/sections`).onSnapshot((snapshot)=>{
@@ -121,50 +99,19 @@ function Article(props) {
   const editMode = canEdit && !readOnly;
   const frameClass = canEdit ? classes.editorFrame : classes.readerFrame;
   const context = { pathArticle:refArticle.path };
-  debugger
+
   return (
     <CommonFrame user={user}>
       <div className={frameClass}>
-        <Grid container>
-          <Like userId={user.id} articleId={article.id} />
-          <Grid item xs={canEdit ? 11 : 12}>
-              <Typography component="h1" variant="h1" gutterBottom className={classes.title}>
-              {article.title}
-            </Typography>
-          </Grid>
-          {
-            canEdit && 
-            <Grid item xs={1}>
-              <IconButton size="small" onClick={toggleReadOnly}>
-                <EditIcon />
-              </IconButton>
-            </Grid>
-          }
-        </Grid>
-        {
-          editMode && 
-          <BlogSection index={ 0 } resource={{}} saveSection={insertSection} insertImage={insertImage} {...context} />
-        }
-        {
-          article.sections.map((sectionId, index)=>{
-            return <div key={sectionId}>
-              <BlogSection index={ index } sectionId={sectionId} resource={ sections[sectionId] } 
-                  saveSection={updateSection} deleteSection={deleteSection} 
-                  insertImage={insertImage} onImageUpload={onImageUpload} 
-                  readOnly={!editMode} {...context} />
-              { editMode && <BlogSection index={ index+1 } resource={{}}
-                  insertImage={insertImage} saveSection={insertSection} {...context} /> }
-            </div>
-          })
-        }
+        ok
       </div>
     </CommonFrame>
 );
-  Article.propTypes = {
+  Like.propTypes = {
     classes: PropTypes.object.isRequired,
     db: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
   };
 }
 
-export default withStyles(styles)(Article);
+export default withStyles(styles)(Like);
