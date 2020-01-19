@@ -136,12 +136,12 @@ function Article(props) {
   const editMode = canEdit && !readOnly;
   const frameClass = canEdit ? classes.editorFrame : classes.readerFrame;
   const context = { pathArticle: refArticle.path };
-  debugger;
+  debugger
   return (
     <CommonFrame user={user}>
       <div className={frameClass}>
         <Grid container>
-          <Like userId={user.id} articleId={article.id} />
+          <Like db={db} userId={"1"} articleId={"1"} />
           <Grid item xs={canEdit ? 11 : 12}>
             <Typography
               component="h1"

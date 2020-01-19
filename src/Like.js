@@ -34,20 +34,27 @@ class Like extends React.Component {
   }
 
   like = async () => {
-    const pathLike = `/likes`;
-    const refLike = this.props.db.doc(pathLike);
-    await refLike.collection("likes").add({
-      userId: 1,
-      articleId: 1
+    const pathLike = `likes`;
+    // debugger
+    const refLike = this.props.db.collection(pathLike);
+    await refLike.add({
+      userId: "1",
+      articleId: "1"
     });
   };
 
-  unLike = async () => {};
+  unLike = async () => {
+
+    const pathLike = `likes`;
+    // debugger
+    const refLike = this.props.db.collection(pathLike);
+    await refLike.remove({});
+  };
 
   getLikeCount = async () => {
     const pathLike = `/likes`;
     const refLike = this.props.db.doc(pathLike);
-    const result = await refLike.where("articleId", "==", 1).get();
+    const result = await refLike.where("articleId", "==", "1").get();
     console.log("result", result);
     this.setState({ likeCount: result.size });
   };
